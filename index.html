@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const str = '((()))',
+            bracketsConfig = [
+                ['(', ')'],
+                ['|', '|']
+
+
+            ];
+
+
+
+        // function check(str, bracketsConfig) {
+        //     let arr = str.split('');
+        //     let open_bracket,
+        //         close_bracket,
+        //         is_pair = 0;
+
+        //     while (arr.length > 0) {
+        //         open_bracket = arr.shift();
+        //         close_bracket = arr.pop();
+        //         bracketsConfig.forEach((element) => {
+        //             is_pair += Number(element[0] === open_bracket && element[1] === close_bracket);
+        //             console.log(is_pair);
+        //         });
+
+        //         if(!is_pair) return false;
+        //         is_pair = 0;
+        //     }
+
+        //     return true;
+        // }
+
+
+
+        function check(str, bracketsConfig) {
+            let arr = str.split('');
+            let made_optimization = true;
+
+            while (made_optimization) {
+                delta = arr.length;
+
+                for (let index = 0; index < arr.length; index += 1) {
+
+                    bracketsConfig.forEach(element => {
+
+                        if (element[0] === arr[index] && element[1] === arr[index + 1]) arr.splice(index, 2);
+
+                    });
+                }
+                if (arr.length > 0 && delta > arr.length) made_optimization = true;
+                else made_optimization = false;
+            }
+
+            return arr.length === 0;
+
+        }
+
+
+
+
+        console.log(check(str, bracketsConfig));
+
+    </script>
+</body>
+
+</html>
